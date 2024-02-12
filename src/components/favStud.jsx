@@ -1,14 +1,43 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { ListStudent } from "../FavContext"
 
 
 const FavStudents=()=>{
-    // const {listStudents,setlistStudents}=useContext(ListStudent)
+    
+    const { listStudents, setlistStudents } = useContext(ListStudent)
 
-    const [favArray,setfavArray]=useState(["one","two"])
 
-    const removeButton=()=>{
-        
+
+    // const [favArray,setfavArray]=useState(["one","two"])
+
+
+
+    const removeButton=(deleteName)=>{
+
+        var deleteItem= listStudents.filter((lists)=>{
+            // console.log(deleteItem)
+
+        if(lists.name==deleteName){
+            return false
+        }
+        else
+        {
+            return true
+        }
+
+          
+            // if(deleteName !==lists.favorite)
+            // {
+            //     return true
+            // }
+            // else{
+            //     return false
+            // }
+    })
+    setlistStudents(deleteItem)
+       
     }
 
     return(
@@ -20,9 +49,10 @@ const FavStudents=()=>{
                 </div>
             <ul>
                 {
-                    favArray.map((info)=>{
-                        return( <li className=" ml-5">{info} <button className=" mt-10 bg-rose-600 text-white rounded-xl" 
-                        style={{width:"150px",height:"38px"}} onClick={()=>removeButton()}>Remove</button></li>)
+                    listStudents.map((info,index)=>{
+                        return( <li key={index} className="ml-5 mt-8 text-xl relative">{index+1}. {info.name} 
+                        <button className=" bg-rose-600 -mt-1 text-white rounded-xl absolute  left-40" 
+                        style={{width:"150px",height:"38px"}} onClick={()=>removeButton(info.name)}>Remove</button></li>)
                     })
                 }
 

@@ -11,17 +11,26 @@ const ListOfStudents = () => {
     const { listStudents, setlistStudents } = useContext(ListStudent)
 
 
-    // const[addItem,setaddItem]=useState("")
+    // const[addItem,setaddItem]=useState(ListStudent)
+
+    // setlistStudents(deleteItem)
+    // console.log(addItem)
+    
 
     console.log(listStudents)
     console.log(setlistStudents)
 
     // const [buttonClicked,setbuttonClicked]=useState(false)
     // console.log(buttonClicked)
+    // var updateList=[...listStudents]
+    const handleChange = (name) => {
 
-    const handleChange = () => {
+        const newStudent={name:name,favorite:false}
 
-        setlistStudents([...listStudents])
+        setlistStudents([...listStudents,newStudent])
+        // updateList.favorite=true;
+
+        // setlistStudents([...listStudents,addItem])
 
     }
 
@@ -47,7 +56,7 @@ const ListOfStudents = () => {
                                 style={{ minWidth: "100px" }}> {index + 1}. {data.name}
                                 <button type="button" className=" bg-black ml-10 text-ellipsis -mt-1
                               text-white rounded-xl absolute left-40"
-                                    style={{ width: "150px", height: "38px" }} onClick={handleChange}>Add to Favorite</button> </li>
+                                    style={{ width: "150px", height: "38px" }} onClick={()=>handleChange(data.name)}>Add to Favorite</button> </li>
                         </div>)
                     })
                 }
