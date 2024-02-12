@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import FavContext from "./FavContext"
+import { ListStudent } from "./FavContext"
+import ListOfStudents from "./components/ListStud"
+import FavStudents from "./components/favStud"
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+const App=()=>{
+
+  return(
+    <>
+      
+        <FavContext>
+          <BrowserRouter>
+          <Routes>
+             <Route path="/" element={<ListOfStudents/>}></Route>
+             <Route path="/fav" element={<FavStudents></FavStudents>}></Route>
+          </Routes>
+          </BrowserRouter>
+        </FavContext>
+        
+       
+    </>
+  )
 }
-
-export default App;
+export default App
