@@ -2,35 +2,45 @@
 import { useContext } from "react"
 
 import { ListStudent } from "../FavContext"
-import FavStudents from "./favStud"
+// import FavStudents from "./favStud"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
+
 const ListOfStudents = () => {
 
-    const { listStudents, setlistStudents } = useContext(ListStudent)
+    const { favArray,setfavArray } = useContext(ListStudent)
 
+    // const [clicked, setClicked] = useState(false);
 
-    // const[addItem,setaddItem]=useState(ListStudent)
+    const [listStudents,setlistStudents]=useState([
+        {id:1, name: "Bharath",favorite:false},
+        {id:2, name: "Praveen",favorite:false},
+        {id:3, name: "Kumar",favorite:false},
+        {id:4, name: "Ramya",favorite:false},
+        {id:5, name: "Monica",favorite:false}
+    ])
 
-    // setlistStudents(deleteItem)
-    // console.log(addItem)
-    
-
-    console.log(listStudents)
-    console.log(setlistStudents)
-
-    // const [buttonClicked,setbuttonClicked]=useState(false)
-    // console.log(buttonClicked)
-    // var updateList=[...listStudents]
     const handleChange = (name) => {
 
-        const newStudent={name:name,favorite:false}
+        
+        const isAlreadyAdded = favArray.some((student) => student.name === name);
+        if (!isAlreadyAdded) {
+            // Add the name to the favorites list
+            setfavArray([...favArray, { name }]);
 
-        setlistStudents([...listStudents,newStudent])
-        // updateList.favorite=true;
+            const temp = listStudents?.map(item => {
+                if (item.name === name) {
+                    item.favorite = !item.favorite
+                }
+                return item;
+            })
+    
+            setlistStudents(temp)
 
-        // setlistStudents([...listStudents,addItem])
+
+        
+        }
 
     }
 
@@ -51,12 +61,14 @@ const ListOfStudents = () => {
             <ul>
                 {
                     listStudents.map((data, index) => {
-                        return (<div className="">
-                            <li key={index} className="ml-5 mt-8 text-xl relative"
+                        return (<div className="" key={index}>
+                            <li className="ml-5 mt-8 text-xl relative"
                                 style={{ minWidth: "100px" }}> {index + 1}. {data.name}
-                                <button type="button" className=" bg-black ml-10 text-ellipsis -mt-1
-                              text-white rounded-xl absolute left-40"
-                                    style={{ width: "150px", height: "38px" }} onClick={()=>handleChange(data.name)}>Add to Favorite</button> </li>
+                                <button type="button" className={data.favorite ? 
+                                "opacity-5  bg-black ml-10 text-ellipsis -mt-1 text-white rounded-xl absolute left-40" 
+                                : "bg-black ml-10 text-ellipsis -mt-1 text-white rounded-xl absolute left-40"}
+                                    style={{ width: "150px", height: "38px" }} onClick={() => handleChange(data.name)}>
+                                    Add to Favorite</button> </li>
                         </div>)
                     })
                 }
@@ -68,4 +80,4 @@ const ListOfStudents = () => {
         </div>
     )
 }
-export default ListOfStudents
+export default ListOfStudents;

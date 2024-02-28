@@ -4,30 +4,33 @@ import { useState } from "react"
 
 const ListStudent=createContext()
 
-
+// const FavLists=createContext()
 
 const FavContext=(data)=>{
 
-    const [listStudents,setlistStudents]=useState([
-        { name: "Bharath", favorite: false },
-        { name: "Praveen", favorite: false },
-        { name: "Kumar", favorite: false },
-        { name: "Ramya", favorite: false },
-        { name: "Monica", favorite: false }
-    ])
+
+    const [favArray,setfavArray]=useState([])
+
+   
+   
 
     // const [favArray,setfavArray]=useState(["one","two"])
 
     return(
         <div>
 
-            <ListStudent.Provider value={{listStudents,setlistStudents}}>
+            <ListStudent.Provider  value={{favArray,setfavArray}}>
                 
                 {data.children}
             </ListStudent.Provider>
+
+            {/* <FavLists.Provider value={{favArray,setfavArray}}>
+            
+            </FavLists.Provider> */}
 
         </div>
     )
 }
 export default FavContext
 export {ListStudent}
+// export {FavLists}

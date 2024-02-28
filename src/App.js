@@ -1,4 +1,4 @@
-import FavContext from "./FavContext"
+import FavContext, { FavLists } from "./FavContext"
 import { ListStudent } from "./FavContext"
 import ListOfStudents from "./components/ListStud"
 import FavStudents from "./components/favStud"
@@ -14,6 +14,7 @@ const App=()=>{
       
         <FavContext>
           <BrowserRouter>
+          
           <Routes>
              <Route path="/" element={<ListOfStudents/>}></Route>
              <Route path="/fav" element={<FavStudents></FavStudents>}></Route>
